@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "TraderFlow - Plataforma de Análise para Traders",
-  description: "A plataforma completa para traders profissionais de índice futuro. Registre, analise e otimize suas estratégias com dados precisos.",
+  description:
+    "A plataforma completa para traders profissionais de índice futuro. Registre, analise e otimize suas estratégias com dados precisos.",
 };
 
 export default function RootLayout({
@@ -32,7 +33,7 @@ export default function RootLayout({
         <Script src="/lasy-bridge.js" strategy="beforeInteractive" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         {children}
       </body>

@@ -1,27 +1,47 @@
-"use client"
+"use client";
 
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Plus, Edit, TrendingUp, ArrowUpRight, ArrowDownRight, Calendar, Clock } from "lucide-react"
-import { useState } from "react"
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Plus,
+  Edit,
+  TrendingUp,
+  ArrowUpRight,
+  ArrowDownRight,
+  Calendar,
+  Clock,
+} from "lucide-react";
+import { useState } from "react";
 
 interface Operacao {
-  id: string
-  mercado: string
-  ativo: string
-  tipoGrafico: string
-  estrategia: string
-  direcao: "Compra" | "Venda"
-  ticks: number
-  notas: string
-  dataEntrada: string
-  horarioInicio: string
-  horarioFim: string
+  id: string;
+  mercado: string;
+  ativo: string;
+  tipoGrafico: string;
+  estrategia: string;
+  direcao: "Compra" | "Venda";
+  ticks: number;
+  notas: string;
+  dataEntrada: string;
+  horarioInicio: string;
+  horarioFim: string;
 }
 
 const operacoesIniciais: Operacao[] = [
@@ -36,7 +56,7 @@ const operacoesIniciais: Operacao[] = [
     notas: "Rompimento de resistência com volume forte",
     dataEntrada: "2024-01-07",
     horarioInicio: "10:15",
-    horarioFim: "10:45"
+    horarioFim: "10:45",
   },
   {
     id: "2",
@@ -49,7 +69,7 @@ const operacoesIniciais: Operacao[] = [
     notas: "Entrada prematura, não esperou confirmação",
     dataEntrada: "2024-01-07",
     horarioInicio: "14:20",
-    horarioFim: "14:50"
+    horarioFim: "14:50",
   },
   {
     id: "3",
@@ -62,7 +82,7 @@ const operacoesIniciais: Operacao[] = [
     notas: "Operação perfeita, seguiu todos os critérios",
     dataEntrada: "2024-01-06",
     horarioInicio: "11:00",
-    horarioFim: "11:25"
+    horarioFim: "11:25",
   },
   {
     id: "4",
@@ -75,53 +95,53 @@ const operacoesIniciais: Operacao[] = [
     notas: "Reversão em região de topo",
     dataEntrada: "2024-01-06",
     horarioInicio: "15:30",
-    horarioFim: "16:15"
-  }
-]
+    horarioFim: "16:15",
+  },
+];
 
 export default function OperacoesPage() {
-  const [operacoes, setOperacoes] = useState<Operacao[]>(operacoesIniciais)
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [editandoId, setEditandoId] = useState<string | null>(null)
-  
+  const [operacoes, setOperacoes] = useState<Operacao[]>(operacoesIniciais);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editandoId, setEditandoId] = useState<string | null>(null);
+
   // Form state
-  const [tipoGrafico, setTipoGrafico] = useState("5M")
-  const [estrategia, setEstrategia] = useState("")
-  const [direcao, setDirecao] = useState<"Compra" | "Venda">("Compra")
-  const [ticks, setTicks] = useState("")
-  const [notas, setNotas] = useState("")
-  const [dataEntrada, setDataEntrada] = useState("")
-  const [horarioInicio, setHorarioInicio] = useState("")
-  const [horarioFim, setHorarioFim] = useState("")
+  const [tipoGrafico, setTipoGrafico] = useState("5M");
+  const [estrategia, setEstrategia] = useState("");
+  const [direcao, setDirecao] = useState<"Compra" | "Venda">("Compra");
+  const [ticks, setTicks] = useState("");
+  const [notas, setNotas] = useState("");
+  const [dataEntrada, setDataEntrada] = useState("");
+  const [horarioInicio, setHorarioInicio] = useState("");
+  const [horarioFim, setHorarioFim] = useState("");
 
   const resetForm = () => {
-    setTipoGrafico("5M")
-    setEstrategia("")
-    setDirecao("Compra")
-    setTicks("")
-    setNotas("")
-    setDataEntrada("")
-    setHorarioInicio("")
-    setHorarioFim("")
-    setEditandoId(null)
-  }
+    setTipoGrafico("5M");
+    setEstrategia("");
+    setDirecao("Compra");
+    setTicks("");
+    setNotas("");
+    setDataEntrada("");
+    setHorarioInicio("");
+    setHorarioFim("");
+    setEditandoId(null);
+  };
 
   const handleEdit = (operacao: Operacao) => {
-    setTipoGrafico(operacao.tipoGrafico)
-    setEstrategia(operacao.estrategia)
-    setDirecao(operacao.direcao)
-    setTicks(operacao.ticks.toString())
-    setNotas(operacao.notas)
-    setDataEntrada(operacao.dataEntrada)
-    setHorarioInicio(operacao.horarioInicio)
-    setHorarioFim(operacao.horarioFim)
-    setEditandoId(operacao.id)
-    setDialogOpen(true)
-  }
+    setTipoGrafico(operacao.tipoGrafico);
+    setEstrategia(operacao.estrategia);
+    setDirecao(operacao.direcao);
+    setTicks(operacao.ticks.toString());
+    setNotas(operacao.notas);
+    setDataEntrada(operacao.dataEntrada);
+    setHorarioInicio(operacao.horarioInicio);
+    setHorarioFim(operacao.horarioFim);
+    setEditandoId(operacao.id);
+    setDialogOpen(true);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     const novaOperacao: Operacao = {
       id: editandoId || Date.now().toString(),
       mercado: "Futuros",
@@ -133,23 +153,25 @@ export default function OperacoesPage() {
       notas,
       dataEntrada,
       horarioInicio,
-      horarioFim
-    }
+      horarioFim,
+    };
 
     if (editandoId) {
-      setOperacoes(operacoes.map(op => op.id === editandoId ? novaOperacao : op))
+      setOperacoes(
+        operacoes.map((op) => (op.id === editandoId ? novaOperacao : op))
+      );
     } else {
-      setOperacoes([novaOperacao, ...operacoes])
+      setOperacoes([novaOperacao, ...operacoes]);
     }
 
-    setDialogOpen(false)
-    resetForm()
-  }
+    setDialogOpen(false);
+    resetForm();
+  };
 
   const calcularResultado = (ticks: number) => {
-    const valorPorTick = 10 // R$ 10 por tick no WIN
-    return ticks * valorPorTick
-  }
+    const valorPorTick = 10; // R$ 10 por tick no WIN
+    return ticks * valorPorTick;
+  };
 
   return (
     <div className="space-y-6">
@@ -164,30 +186,51 @@ export default function OperacoesPage() {
       {/* Grid de Operações */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {operacoes.map((operacao) => {
-          const resultado = calcularResultado(operacao.ticks)
-          const isPositivo = operacao.ticks > 0
+          const resultado = calcularResultado(operacao.ticks);
+          const isPositivo = operacao.ticks > 0;
 
           return (
-            <Card key={operacao.id} className={`bg-[#0f0f0f] border-gray-800 p-6 hover:border-${isPositivo ? 'emerald' : 'red'}-500/30 transition-all`}>
+            <Card
+              key={operacao.id}
+              className={`bg-[#0f0f0f] border-gray-800 p-6 hover:border-${
+                isPositivo ? "emerald" : "red"
+              }-500/30 transition-all`}
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className={`w-12 h-12 ${isPositivo ? 'bg-emerald-500/10' : 'bg-red-500/10'} rounded-lg flex items-center justify-center`}>
+                  <div
+                    className={`w-12 h-12 ${
+                      isPositivo ? "bg-emerald-500/10" : "bg-red-500/10"
+                    } rounded-lg flex items-center justify-center`}
+                  >
                     {operacao.direcao === "Compra" ? (
-                      <ArrowUpRight className={`w-6 h-6 ${isPositivo ? 'text-emerald-400' : 'text-red-400'}`} />
+                      <ArrowUpRight
+                        className={`w-6 h-6 ${
+                          isPositivo ? "text-emerald-400" : "text-red-400"
+                        }`}
+                      />
                     ) : (
-                      <ArrowDownRight className={`w-6 h-6 ${isPositivo ? 'text-emerald-400' : 'text-red-400'}`} />
+                      <ArrowDownRight
+                        className={`w-6 h-6 ${
+                          isPositivo ? "text-emerald-400" : "text-red-400"
+                        }`}
+                      />
                     )}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold">{operacao.estrategia}</h3>
-                    <p className="text-sm text-gray-400">{operacao.ativo} • {operacao.tipoGrafico}</p>
+                    <h3 className="text-lg font-bold text-gray-200">
+                      {operacao.estrategia}
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      {operacao.ativo} • {operacao.tipoGrafico}
+                    </p>
                   </div>
                 </div>
                 <Button
                   size="sm"
                   variant="ghost"
                   onClick={() => handleEdit(operacao)}
-                  className="text-gray-400 hover:text-emerald-400"
+                  className="text-gray-400 hover:bg-gray-800 hover:text-emerald-400"
                 >
                   <Edit className="w-4 h-4" />
                 </Button>
@@ -196,26 +239,37 @@ export default function OperacoesPage() {
               <div className="space-y-3 mb-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm">Direção</span>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    operacao.direcao === "Compra" 
-                      ? "bg-emerald-500/10 text-emerald-400" 
-                      : "bg-blue-500/10 text-blue-400"
-                  }`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      operacao.direcao === "Compra"
+                        ? "bg-emerald-500/10 text-emerald-400"
+                        : "bg-blue-500/10 text-blue-400"
+                    }`}
+                  >
                     {operacao.direcao}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm">Ticks</span>
-                  <span className={`text-lg font-bold ${isPositivo ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {isPositivo ? '+' : ''}{operacao.ticks}
+                  <span
+                    className={`text-lg font-bold ${
+                      isPositivo ? "text-emerald-400" : "text-red-400"
+                    }`}
+                  >
+                    {isPositivo ? "+" : ""}
+                    {operacao.ticks}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm">Resultado</span>
-                  <span className={`text-xl font-bold ${isPositivo ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {isPositivo ? '+' : ''}R$ {resultado}
+                  <span
+                    className={`text-xl font-bold ${
+                      isPositivo ? "text-emerald-400" : "text-red-400"
+                    }`}
+                  >
+                    {isPositivo ? "+" : ""}R$ {resultado}
                   </span>
                 </div>
               </div>
@@ -223,30 +277,41 @@ export default function OperacoesPage() {
               {operacao.notas && (
                 <div className="bg-gray-900/50 rounded-lg p-3 mb-4">
                   <div className="text-xs text-gray-400 mb-1">Notas</div>
-                  <p className="text-sm text-gray-300 leading-relaxed">{operacao.notas}</p>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    {operacao.notas}
+                  </p>
                 </div>
               )}
 
               <div className="pt-4 border-t border-gray-800 space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-gray-400">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(operacao.dataEntrada + 'T00:00:00').toLocaleDateString('pt-BR')}</span>
+                  <span>
+                    {new Date(
+                      operacao.dataEntrada + "T00:00:00"
+                    ).toLocaleDateString("pt-BR")}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
                   <Clock className="w-4 h-4" />
-                  <span>{operacao.horarioInicio} - {operacao.horarioFim}</span>
+                  <span>
+                    {operacao.horarioInicio} - {operacao.horarioFim}
+                  </span>
                 </div>
               </div>
             </Card>
-          )
+          );
         })}
       </div>
 
       {/* Botão Flutuante */}
-      <Dialog open={dialogOpen} onOpenChange={(open) => {
-        setDialogOpen(open)
-        if (!open) resetForm()
-      }}>
+      <Dialog
+        open={dialogOpen}
+        onOpenChange={(open) => {
+          setDialogOpen(open);
+          if (!open) resetForm();
+        }}
+      >
         <DialogTrigger asChild>
           <Button
             size="lg"
@@ -267,11 +332,19 @@ export default function OperacoesPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Mercado</Label>
-                <Input value="Futuros" disabled className="bg-gray-900 border-gray-700" />
+                <Input
+                  value="Futuros"
+                  disabled
+                  className="bg-gray-900 border-gray-700"
+                />
               </div>
               <div className="space-y-2">
                 <Label>Ativo</Label>
-                <Input value="WIN" disabled className="bg-gray-900 border-gray-700" />
+                <Input
+                  value="WIN"
+                  disabled
+                  className="bg-gray-900 border-gray-700"
+                />
               </div>
             </div>
 
@@ -305,7 +378,12 @@ export default function OperacoesPage() {
 
             <div className="space-y-2">
               <Label>Direção</Label>
-              <Select value={direcao} onValueChange={(value) => setDirecao(value as "Compra" | "Venda")}>
+              <Select
+                value={direcao}
+                onValueChange={(value) =>
+                  setDirecao(value as "Compra" | "Venda")
+                }
+              >
                 <SelectTrigger className="bg-gray-900 border-gray-700">
                   <SelectValue />
                 </SelectTrigger>
@@ -327,8 +405,13 @@ export default function OperacoesPage() {
                 required
               />
               {ticks && (
-                <p className={`text-sm ${Number(ticks) > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                  Resultado: {Number(ticks) > 0 ? '+' : ''}R$ {calcularResultado(Number(ticks))}
+                <p
+                  className={`text-sm ${
+                    Number(ticks) > 0 ? "text-emerald-400" : "text-red-400"
+                  }`}
+                >
+                  Resultado: {Number(ticks) > 0 ? "+" : ""}R${" "}
+                  {calcularResultado(Number(ticks))}
                 </p>
               )}
             </div>
@@ -382,10 +465,10 @@ export default function OperacoesPage() {
                 type="button"
                 variant="outline"
                 onClick={() => {
-                  setDialogOpen(false)
-                  resetForm()
+                  setDialogOpen(false);
+                  resetForm();
                 }}
-                className="flex-1 border-gray-700 hover:bg-gray-800"
+                className="flex-1 hover:text-white border-gray-700 bg-gray-900 hover:bg-gray-800"
               >
                 Cancelar
               </Button>
@@ -400,5 +483,5 @@ export default function OperacoesPage() {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
