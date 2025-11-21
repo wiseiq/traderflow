@@ -94,11 +94,11 @@ export default function CadastroPage() {
               <input type="checkbox" className="mt-1 rounded border-gray-700 bg-gray-800" required />
               <label className="text-gray-300">
                 Concordo com os{" "}
-                <Link href="#" className="text-emerald-400 hover:text-emerald-300">
+                <Link href="/termos-de-uso" className="text-emerald-400 hover:text-emerald-300">
                   Termos de Uso
                 </Link>{" "}
                 e{" "}
-                <Link href="#" className="text-emerald-400 hover:text-emerald-300">
+                <Link href="/politica-de-privacidade" className="text-emerald-400 hover:text-emerald-300">
                   Política de Privacidade
                 </Link>
               </label>

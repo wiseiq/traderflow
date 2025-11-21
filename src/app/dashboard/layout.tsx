@@ -69,7 +69,10 @@ export default function DashboardLayout({
             <DropdownMenuContent align="end" className="w-56 bg-gray-900 border-gray-800">
               <DropdownMenuLabel className="text-gray-200">Minha Conta</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-gray-800" />
-              <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-gray-800 cursor-pointer">
+              <DropdownMenuItem 
+                onClick={() => router.push('/dashboard/perfil')}
+                className="text-gray-300 focus:text-white focus:bg-gray-800 cursor-pointer"
+              >
                 <User className="mr-2 h-4 w-4" />
                 <span>Perfil</span>
               </DropdownMenuItem>
